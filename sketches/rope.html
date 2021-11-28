@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <script type="text/javascript" src="../p5.min.js"></script>
+    <title>Waves</title>
+</head>
+<body>
+  
+ <style>
+     body{
+         display: flex;
+         flex-flow: row wrap;
+         justify-content: center;
+         align-items: center;align-content: center;
+         margin:0;
+         padding:0;
+     }
+
+     hr{
+        position: absolute; 
+        z-index: 20;
+        height: 20px;
+        width: 100%;
+        background: rgb(105, 193, 180);
+        border: none;
+     }
+     hr.top{
+        top: 25%;
+     }
+
+     hr.bottom{
+        bottom: 25%;
+     }
+     hr.bottomMost{
+        bottom: 13.5%;
+        height: 5px;;
+     }
+
+     .rope{
+        z-index: 10;
+        position: absolute;
+        top:12%;
+        right: 0;
+        font-size: 100px;
+        color: rgb(105, 193, 180);;
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+     }
+     .ropeUpsideDown{
+        z-index: 10;
+        position: absolute;
+        bottom:12%;
+        left: 0;
+        /* transform: rotate(180deg); */
+        font-size: 100px;
+        color: rgb(105, 193, 180);;
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+     }
+     button{
+         z-index: 200;
+         width: 400px;
+         height: 80px;
+        position: absolute;
+        bottom: 14.9%;
+         left:30%;
+         border:none;
+         color: rgb(199, 230, 168);
+         background-color: rgb(105, 193, 180);
+         font-size: 40px;
+         font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+     }
+     button:hover{
+         background-color: rgb(77, 145, 145);
+         color:rgb(105, 193, 180);;
+     }
+
+ </style> 
+   <hr class="top">
+ <div class="rope">
+     ROPE
+ </div>
+ <div class="ropeUpsideDown">
+    ROPE
+</div>
+ <hr class="bottom">
+<hr class="bottomMost">
+<button onclick="location.reload()">retwine</button>
+
+   <script>
+
+    let width = innerWidth,
+        height = innerHeight,
+        counter = travelSpeed = 0,
+        sinFunc = (x) => sin(x)*100,
+        cosFunc = (x) => cos(x*.1)*100;
+        r = (x)=> x>256? x = 0: x;
+        g=100,
+        b= 40;
+    
+        let widthBound = (x) => x > width?travelSpeed =1 : x;
+
+
+    function setup(){
+        createCanvas(width, height);
+        background('#99ee99');
+    }
+
+    function draw(){
+
+        counter += .1;
+        travelSpeed +=10;
+        // background(0);
+
+        
+
+        translate(counter-20,height/2);
+
+        strokeWeight(30);
+          point(widthBound(travelSpeed), sin(counter)*50);
+
+         colorMode(HSB,100) 
+          stroke(sinFunc(counter*.1),50, 100);
+        strokeWeight(30);
+          point(widthBound(travelSpeed), sin(counter)*20);
+          
+          beginShape();
+          noStroke();
+          fill('#99ee99');
+          ellipse(0,0,100,100);
+          endShape();
+
+console.log(r(sin(counter*.1)*100+201));
+    }
+   </script> 
+</body>
+</html>
