@@ -9,7 +9,6 @@
 </head>
 <body>
     
-    <input type="slider">
     
 <style>
     body{
@@ -18,6 +17,47 @@
         justify-content: center;
         align-items: center;
     }
+
+    input[type='range'], button{
+        -webkit-appearance: none;
+        width: 50%;
+    height: 25px;
+    background: rgb(179, 179, 179);
+    }
+
+    button{
+        margin-top:25px;
+        background: #648bce;
+        color: #fff;
+        height: 50px;
+        font-size: 20px;
+        border: none;
+    }
+    button:hover{
+        background: #80a3df;
+    }
+
+
+    input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #648bce;
+  cursor: pointer;
+}
+
+input[type='range']::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #04AA6D;
+  cursor: pointer;
+}
+label{
+    display: flex;
+    justify-content: start;
+    align-items: flex-start;
+}
 </style>
 
     <script>
@@ -30,12 +70,16 @@
        function setup(){
            createCanvas(width, height);
            background(34);
-           baseWidthslider = createSlider(1, width/2, 50);
-   
+
+
+
+            // start create sliders on page
+           baseWidthslider = createSlider(1, width/2-50, 30, .01);
+           growSlider = createSlider(1, width/2, 0);
+           widthSlider = createSlider(1, 300, 10);
+
            baseWidthslider.style('width', 200);
            baseWidthslider.id('baseWidth');
-           growSlider = createSlider(1, width/2, 0);
-           widthSlider = createSlider(1, 300, 20);
            growSlider.id('grow');
            widthSlider.id('width');
 
@@ -49,9 +93,13 @@
            document.getElementById('baseWidth').insertAdjacentElement("beforebegin", baseWidthTitle);
            document.getElementById('grow').insertAdjacentElement("beforebegin", growSliderTitle);
            document.getElementById('width').insertAdjacentElement("beforebegin", widthSliderTitle);
-
-    
+            let reset = document.createElement("button");
+            reset.innerText = "Reset";
+            document.getElementById('width').insertAdjacentElement("afterend", reset);
+            document.body.lastChild.addEventListener('click', function() {location.reload(); console.log('reset')});
+        // end create sliders
        }
+
 
        function draw(){
            let centerSize = baseWidthslider.value();
@@ -65,16 +113,30 @@
            polygon(width/2, height/2, centerSize, hexagon);
 
 
-       
+         angleMode(DEGREES);
            translate(width/2, height/2);
+         rotate(30);
          
-           angleMode(DEGREES);
            let angle = 0;
            let grow = (input) =>{
+
+            // switch(input){
+            //     case input > 0:
+            //         return growSlider.value();
+            //         break;
+            //     case input < 0:
+            //         return -1 * vgrowSlider.value();
+            //         break;
+            //     case input = 0:
+            //         return 0
+            //         break;
+            // }
                if(input > 0){
                return growSlider.value()
                }else if(input < 0){
                 return -1 * growSlider.value();
+               }else if(input=0){
+                   return 0;
                }
            }
            for(let i = 0; i <= hexagon; i++){
