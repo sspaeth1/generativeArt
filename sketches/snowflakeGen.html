@@ -75,7 +75,7 @@ label{
 
             // start create sliders on page
            baseWidthslider = createSlider(1, width/2-50, 30, .01);
-           growSlider = createSlider(1, width/2, 0);
+           growSlider = createSlider(1, 5, 0, .01);
            widthSlider = createSlider(1, 300, 10);
 
            baseWidthslider.style('width', 200);
@@ -118,7 +118,7 @@ label{
          rotate(30);
          
            let angle = 0;
-           let grow = (input) =>{
+        //    let grow = (input) =>{
 
             // switch(input){
             //     case input > 0:
@@ -131,19 +131,20 @@ label{
             //         return 0
             //         break;
             // }
-               if(input > 0){
-               return growSlider.value()
-               }else if(input < 0){
-                return -1 * growSlider.value();
-               }else if(input=0){
-                   return 0;
-               }
-           }
+
+        //        if(input > 0){
+        //        return growSlider.value()
+        //        }else if(input < 0){
+        //         return -1 * growSlider.value();
+        //        }else if(input=0){
+        //            return 0;
+        //        }
+        //    }
            for(let i = 0; i <= hexagon; i++){
             fill(256);
             let x = centerSize * sin(angle),
                 y = centerSize * cos(angle);            
-            ellipse(x + grow(x) , y + grow(y), widthAmount, widthAmount);
+            ellipse(x * growAmount  , y* growAmount , widthAmount, widthAmount);
             angle+=60;
 
            }
