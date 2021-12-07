@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../p5.js"></script>
+    <title>Snowflake generator</title>
+</head>
+<body>
+    
+    <input type="slider">
+    
+<style>
+    body{
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+    <script>
+       let baseWidthslider,
+       growSlider,
+       widthSlider,
+       width = innerWidth/2,
+       height = innerHeight/2;
+       
+       function setup(){
+           createCanvas(width, height);
+           background(34);
+           baseWidthslider = createSlider(1, width/2, 50);
+   
+           baseWidthslider.style('width', 200);
+           baseWidthslider.id('baseWidth');
+           growSlider = createSlider(1, width/2, 0);
+           widthSlider = createSlider(1, 300, 20);
+           growSlider.id('grow');
+           widthSlider.id('width');
+
+
+           let baseWidthTitle = document.createElement("label"),
+            growSliderTitle = document.createElement("label"),
+            widthSliderTitle = document.createElement("label");
+           baseWidthTitle.innerHTML = "Base Width";
+           growSliderTitle.innerHTML = "Grow";
+           widthSliderTitle.innerHTML = "Width";
+           document.getElementById('baseWidth').insertAdjacentElement("beforebegin", baseWidthTitle);
+           document.getElementById('grow').insertAdjacentElement("beforebegin", growSliderTitle);
+           document.getElementById('width').insertAdjacentElement("beforebegin", widthSliderTitle);
+
+    
+       }
+
+       function draw(){
+           let centerSize = baseWidthslider.value();
+           let growAmount = growSlider.value();
+           let widthAmount = widthSlider.value();
+           hexagon = 6;
+           point(200, 200);
+           stroke('rgba(20,20,20,.1)');
+           fill(256);
+           noStroke();
+           polygon(width/2, height/2, centerSize, hexagon);
+
+
+       
+           translate(width/2, height/2);
+         
+           angleMode(DEGREES);
+           let angle = 0;
+           let grow = (input) =>{
+               if(input > 0){
+               return growSlider.value()
+               }else if(input < 0){
+                return -1 * growSlider.value();
+               }
+           }
+           for(let i = 0; i <= hexagon; i++){
+            fill(256);
+            let x = centerSize * sin(angle),
+                y = centerSize * cos(angle);            
+            ellipse(x + grow(x) , y + grow(y), widthAmount, widthAmount);
+            angle+=60;
+
+           }
+           
+       }
+
+ 
+
+       function polygon(x, y, radius, npoints) {
+  let angle = TWO_PI / npoints;
+  beginShape();
+  for (let a = 0; a < TWO_PI; a += angle) {
+    let sx = x + cos(a) * radius;
+    let sy = y + sin(a) * radius;
+    vertex(sx, sy);
+  }
+  endShape(CLOSE);
+}
+    </script>
+</body>
+</html>
