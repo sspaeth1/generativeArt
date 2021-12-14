@@ -23,8 +23,8 @@
 
 let iterateNum = 5,
 padding = 5,
-width = innerWidth/1.5 - 2*padding,
-heigh = innerHeight- 2*padding;
+width = 800 - 2*padding,
+heigh = 800 - 2*padding;
 largePercent = .75;
 smallPercent = 1 - largePercent,
 colorPallet = ['#ff0000', '#ffff00','#0000ff'],
@@ -42,17 +42,17 @@ function setup(){
      // draw large percent left and top
      for(let i = 0; i < iterateNum; i++){
          fill(colorPallet[Math.ceil(Math.random()*3)-1])
-        square(5,5,heigh*largePercent);
+        square(padding,padding,heigh*largePercent);
      }
 
 
      // draw small percent right
      fill(colorPallet[Math.ceil(Math.random()*3)-1])
-     square(heigh*largePercent, 10, width*smallPercent);
+     rect(heigh*largePercent+padding, padding, width*smallPercent-2*padding, heigh*largePercent);
      //draw small percent bottom
           fill(colorPallet[Math.ceil(Math.random()*3)-1])
 
-     square(5,heigh*largePercent, width -2*padding);
+     rect(padding,heigh*largePercent-padding, width -2*padding, heigh*smallPercent);
  }
  func1();
 }
