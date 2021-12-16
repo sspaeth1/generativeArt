@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script  src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js'></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+
+<style>
+    .entry{
+        margin-bottom:20px;
+    }
+    .sectionBox{
+        border: 1px solid grey;
+        padding: 20px;
+        margin: 20px;
+    }
+    label{
+        font-size: 30px;
+    }
+    .exams{
+        display: flex;
+        flex-flow: row wrap;
+    }
+    .exams .entry{
+       max-width: 20%;
+       margin-right: 4% ;
+    }
+</style>
+<body style="display: flex; flex-flow: column wrap; margin:auto;">
+    <h1 style="display: flex; flex-flow: column wrap; margin:auto;">Score Calculator  405</h1>
+<div class="jumbotron"  style="width:60%; justify-content: center; align-content: center; margin: auto;">
+
+    <form>
+        <div class="form-group entry">
+            <label for="studentName">StudentName</label>
+            <input type="text" class="form-control" id="studenName" aria-describedby="exam1" placeholder="Student Name">
+            <small id="exam1percentTip" class="form-text text-muted">Name</small>
+          </div>
+
+          <div class="row">
+              
+          </div>
+        <div class='sectionBox exams'>
+            
+
+            <div class="form-group entry">
+            <label for="exam1">Exam1</label>
+            <input type="text" class="form-control" id="exam1" aria-describedby="exam1" placeholder="0">
+            <small id="exam1percentTip" class="form-text text-muted">12.5% grade</small>
+            </div>
+            <div class="form-group entry">
+                <label for="exam1">Exam2</label>
+                <input type="text" class="form-control" id="exam2" aria-describedby="exam2" placeholder="0">
+                <small id="exam2percentTip" class="form-text text-muted">12.5% grade</small>
+            </div>
+            <div class="form-group entry">
+                <label for="exam1">Exam3</label>
+                <input type="text" class="form-control" id="exam3" aria-describedby="exam3" placeholder="0">
+                <small id="exam2percentTip" class="form-text text-muted">12.5% grade</small>
+            </div>
+            <div class="form-group entry">
+                <label for="exam1">Exam4</label>
+                <input type="text" class="form-control" id="exam4" aria-describedby="exam4" placeholder="0">
+                <small id="exam2percentTip" class="form-text text-muted">12.5% grade</small>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5 sectionBox">
+                <div class="form-group entry">
+                    <label for="paper">Paper</label>
+                    <input type="text" class="form-control" id="paper" aria-describedby="paper" placeholder="grade on paper">
+                    <small id="Paper Grade" class="form-text text-muted">25% grade</small>
+                </div>
+            </div>
+            <div class="col-5 sectionBox">
+                <div class="form-group entry">
+                    <label for="finalExam">Final</label>
+                    <input type="text" class="form-control" id="finalExam" aria-describedby="paper" placeholder="grade on final Exam">
+                    <small id="grade on Final exam" class="form-text text-muted">25% grade</small>
+                </div>
+            </div>
+        </div>
+    
+        <div class="sectionBox grade">
+            <h1>Final Grade: <span id="finalGrade"></span></h1>
+        </div>
+      </form>
+</div>
+
+
+<script>
+    let grabExam1 = document.getElementById('exam1'),
+    grabExam2 = document.getElementById('exam2'),
+    grabExam3 = document.getElementById('exam3'),
+    grabExam4 = document.getElementById('exam4'),
+    grabPaper = document.getElementById('paper'),
+    grabFinalExam = document.getElementById('finalExam');
+    grabExam1.value = grabExam2.value = grabExam3.value = grabExam4.value =  0;
+
+    let exam1, exam2, exam3, exam4, paper, finalGrade, examsAvg;
+
+    window.onload = () => {
+        return exam1 = exam2 = exam3 = exam4 = paper = finalExam = 0;
+    }
+
+    grabExam1.addEventListener('blur',()=> {
+        exam1 = document.getElementById('exam1').value;
+         return exam1 = parseInt(exam1);
+    });
+    grabExam2.addEventListener('blur', ()=> {
+        exam2 = document.getElementById('exam2').value;
+        return exam2 = parseInt(exam2);
+    });
+    grabExam3.addEventListener('blur', ()=> {
+        exam3 = document.getElementById('exam3').value;
+        return exam3 = parseInt(exam3);
+    });
+    grabExam4.addEventListener('blur', ()=> {
+        exam4 = document.getElementById('exam4').value;
+        return exam4 = parseInt(exam4);
+    });
+    grabPaper.addEventListener('blur', ()=> {
+        paper = document.getElementById('paper').value;
+        return paper = parseInt(paper);
+    });
+    grabFinalExam.addEventListener('blur', ()=> {
+        finalExam = document.getElementById('finalExam').value;
+        return finalExam = parseInt(finalExam);
+    });
+
+
+
+
+    setInterval(()=> {
+        examsAvg = (exam1+exam2+exam3+exam4)/4;
+        document.getElementById('finalGrade').innerText = examsAvg*.5 + paper * .25 + finalExam * .25;
+        }, 500);
+
+
+// started *;36   ended 9:48 
+
+
+/*
+if( A 93-100
+A- 90-92.9999
+B+ 87-89.9999
+B 83 -86.9999
+B- 80 -82.9999
+C+ 77 - 79.9999
+C 73 - 76.99999
+C- 70 - 72.9999
+NP < 70)
+
+P >= 80
+F < 79.99999
+*/
+</script>
+
+</body>
+</html>
