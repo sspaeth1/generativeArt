@@ -29,19 +29,31 @@
        max-width: 20%;
        margin-right: 4% ;
     }
+    .form-group.entry:first-of-type{
+        margin-top:20px;
+    }
+    .row{
+        justify-content: center;
+    }
+    .btnAddEntry{
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin: auto;
+    }
 </style>
 <body style="display: flex; flex-flow: column wrap; margin:auto;">
-    <h1 style="display: flex; flex-flow: column wrap; margin:auto;">Score Calculator  405</h1>
+    <h1 style="display: flex; flex-flow: column wrap; margin:auto;">Grade Calculator  405</h1>
 <div class="jumbotron"  style="width:60%; justify-content: center; align-content: center; margin: auto;">
 
     <form>
         <div class="form-group entry">
             <label for="studentName">StudentName</label>
             <input type="text" class="form-control" id="studenName" aria-describedby="exam1" placeholder="Student Name">
-            <small id="exam1percentTip" class="form-text text-muted">Name</small>
           </div>
 
-          <div class="row">
+          <div class="row" >
               
           </div>
         <div class='sectionBox exams'>
@@ -86,9 +98,11 @@
         </div>
     
         <div class="sectionBox grade">
-            <h1>Final Grade: <span id="finalGrade"></span></h1>
+            <h1> <span class="font-weight-light" style="color:rgb(198, 198, 198)" >Final Grade:</span> <span id="finalGrade"></span></h1>
         </div>
+        <button type="button" class="btn btn-primary btnAddEntry">Add Name and grade</button>
       </form>
+
 </div>
 
 
@@ -101,11 +115,12 @@
     grabFinalExam = document.getElementById('finalExam');
     grabExam1.value = grabExam2.value = grabExam3.value = grabExam4.value =  0;
 
-    let exam1, exam2, exam3, exam4, paper, finalGrade, examsAvg;
+    let exam1, exam2, exam3, exam4, paper, finalGrade, examsAvg, letterGrade;
 
     window.onload = () => {
         return exam1 = exam2 = exam3 = exam4 = paper = finalExam = 0;
     }
+
 
     grabExam1.addEventListener('blur',()=> {
         exam1 = document.getElementById('exam1').value;
@@ -137,15 +152,39 @@
 
     setInterval(()=> {
         examsAvg = (exam1+exam2+exam3+exam4)/4;
-        document.getElementById('finalGrade').innerText = examsAvg*.5 + paper * .25 + finalExam * .25;
+        numberGrade = examsAvg*.5 + paper * .25 + finalExam * .25;
+
+        document.getElementById('finalGrade').innerText = getLetterGrade(numberGrade) +  " (" +  numberGrade + ")" ;
         }, 500);
 
 
 // started *;36   ended 9:48 
 
 
+let getLetterGrade = (numberGrade) => {
+    if(numberGrade >=  93){
+    return letterGrade = "A";
+}else if(numberGrade >= 90){
+    return letterGrade = "A-";
+}else if(numberGrade >= 87){
+    return letterGrade = "B+";
+}else if(numberGrade >= 83){
+    return letterGrade = "B";
+}else if(numberGrade >= 80){
+    return letterGrade = "B-";
+}else if(numberGrade >= 77){
+    return letterGrade = "C+";
+}else if(numberGrade >= 73){
+    return letterGrade = "C";
+}else if(numberGrade >= 70){
+    return letterGrade = "C-";
+}else{
+    return letterGrade="F";
+}
+}
+
+
 /*
-if( A 93-100
 A- 90-92.9999
 B+ 87-89.9999
 B 83 -86.9999
@@ -154,7 +193,7 @@ C+ 77 - 79.9999
 C 73 - 76.99999
 C- 70 - 72.9999
 NP < 70)
-
+/*
 P >= 80
 F < 79.99999
 */

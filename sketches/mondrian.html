@@ -24,42 +24,86 @@
 let iterateNum = 5,
 padding = 5,
 width = 800 - 2*padding,
-heigh = 800 - 2*padding;
+height = 800 - 2*padding;
 largePercent = .75;
 smallPercent = 1 - largePercent,
-colorPallet = ['#ff0000', '#ffff00','#0000ff'],
+colorPalletPure = ['#ff0000', '#ffff00','#0000ff'],
+colorPallet = ['#fcba03','#035afc', '#ed393f' ],
 rando = Math.ceil(Math.random()*3)-1;
 
 
 console.log(colorPallet[0]);
 
 function setup(){
- createCanvas(width, heigh);
- background('rgb(56, 66, 138)');
+ createCanvas(width+ 2*padding, height + 2*padding);
+ background(colorPallet[Math.ceil(Math.random()*3)-1]);
  strokeWeight(10);
 
- func1 =()=>{
-     // draw large percent left and top
-     for(let i = 0; i < iterateNum; i++){
-         fill(colorPallet[Math.ceil(Math.random()*3)-1])
-        square(padding,padding,heigh*largePercent);
+ // recursion in just one square
+ /*
+ func1 =(rectWidth , rectHeight)=>{
+     if(rectHeight < 5 || rectWidth < 5){
+         return 
+     }else{
+  
+        fill(colorPallet[Math.ceil(Math.random()*3)-1]);
+         rect(padding,padding, rectWidth, rectHeight);
+  rectHeight =  rectHeight/Math.ceil(Math.random()*3)-1;
+        rectWidth = rectWidth/Math.ceil(Math.random()*3)-1;
+        return       func1(rectWidth, rectHeight)
      }
 
+}
+ func1(width, height);
 
-     // draw small percent right
-     fill(colorPallet[Math.ceil(Math.random()*3)-1])
-     rect(heigh*largePercent+padding, padding, width*smallPercent-2*padding, heigh*largePercent);
-     //draw small percent bottom
-          fill(colorPallet[Math.ceil(Math.random()*3)-1])
+*/
 
-     rect(padding,heigh*largePercent-padding, width -2*padding, heigh*smallPercent);
- }
- func1();
+// random horizontal or vertical split
+
+
+function drawRectWidth(rectWidth, rectHeight){
+    let randWidth = rectWidth/Math.ceil(Math.random()*4);
+    let randHeight = rectHeight/Math.ceil(Math.random()*4);
+    let newRectWidth = rectWidth,
+        newRectHeight = rectHeight,
+        maxSize = 50;
+
+    let leftOverWidth = width - randWidth;
+
+    console.log("randWidth " + randWidth.toFixed(0));
+
+    if(randWidth < maxSize || randHeight < maxSize || rectHeight < maxSize || rectWidth < maxSize){
+         return makeSquares()
+    }else{
+        return makeSquares(width,height)
+    }
+    function makeSquares(newRectWidth, newRectHeight){
+        if(Math.floor(Math.random()*10*.2)== 0){
+            //random width
+            fill(colorPallet[Math.ceil(Math.random()*3)-1]);
+            rect(padding, padding, randWidth, rectHeight);
+            fill(colorPallet[Math.ceil(Math.random()*3)-1]);
+            rect(randWidth, padding, leftOverWidth, rectHeight);
+        }else{
+            //random height
+            fill(colorPallet[Math.ceil(Math.random()*3)-1]);
+            rect(padding, padding, rectWidth, randHeight-padding);
+            fill(colorPallet[Math.ceil(Math.random()*3)-1]);
+            rect(padding, randHeight, leftOverWidth, rectHeight);
+        }
+        width = randWidth;
+        height = randHeight;
+    }
+}
+
+drawRectWidth(width, height);
 }
 
 
-
 function draw(){
+    noFill();
+    strokeWeight(30);
+    rect(padding/2,padding/2, 800-padding, 800-padding);
 
 }
 
