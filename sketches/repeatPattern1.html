@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../p5.js"></script>
+    <title>Repeat Pattern</title>
+</head>
+<body>
+    
+<style>
+    input[type='range']{
+        width:100%;
+        height: 30px;
+        border:none;
+    }
+</style>
+<script>
+    let width =  window.innerWidth,
+        height = window.innerHeight,
+        tileingCount = 4,
+        padding = 50,
+        turn = 0;
+
+    function setup(){
+        createCanvas(width,height);
+     //  frameRate(60);
+        angleMode(DEGREES);
+        rectMode(CENTER);
+
+        tileCountSlider = createSlider(1,20, 4);
+
+    }
+
+    function draw(){
+        turn++;
+        background('rgb(110, 218, 174)');
+
+       tileingCount = tileCountSlider.value();
+        function createRect(x,y,size, size, roundedCorner){
+            rect(x,y, size, size,roundedCorner);
+        }
+
+        fill('rgb(64, 157, 83)');
+
+
+
+        for(let x =0; x <tileingCount; x++){
+
+           for(let y=0; y<tileingCount; y++){
+               if(x == 2 && y == 2){
+                   push()
+                    fill('rgb(232, 250, 49)');
+                    stroke('rgb(232, 200, 49)');
+                    strokeWeight(sin(turn)*100);
+                    
+                       translate(x*width/tileingCount+ width/tileingCount/2, 
+                                    y*height/tileingCount + height/tileingCount/2)
+                       rotate(turn);
+
+                       createRect(0,
+                                0,
+                                width/tileingCount-padding*sin(turn).toFixed(2), //width/tileingCount-padding, 
+                                 300,
+                                 20); 
+                   pop();
+               }else{
+   
+                     createRect(x*width/tileingCount+width/tileingCount/2,
+                                y*height/tileingCount+height/tileingCount/2, 
+                                width/tileingCount-padding, 
+                                height/tileingCount-padding,
+                                20
+                                ); 
+               }
+            }
+
+
+            push();
+            fill('blue');
+             let count = 4;
+                for(i=1; i<= count; i++){
+                  for(y=1; y<= count; y++){
+                  }
+                }
+            pop();
+        }
+
+    /* grid  x:y 2d array for loop
+        function makeGrid(x,y){
+            rect(padding+ x*width/tileingCount+x*padding,
+                padding+y*height/tileingCount+y*padding,
+                width/tileingCount,
+                height/tileingCount
+                )
+        }
+        fill('red');
+        for(let y = 0; y <tileingCount; y++){
+            for(let x = 0; x < tileingCount; x++){
+                console.log();
+                if( y%3 == 0){
+                    
+                    push()
+                    rotate(45);
+                    fill('blue');
+                    makeGrid(x,y);
+                    pop()
+               
+                }else{
+                    push()
+                    fill('red');
+                    makeGrid(x,y);
+                pop()
+                }
+            }
+        }
+        */
+    }
+</script>
+
+</body>
+</html>
