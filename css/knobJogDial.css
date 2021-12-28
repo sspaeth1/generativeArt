@@ -1,0 +1,103 @@
+@font-face {
+    font-family: 'digital-7';
+    src: url('../fonts/digital_7/digital-7.ttf') format('ttf');
+    src: url('../fonts/digital_7/digital-7.woff2') format('woff2');
+
+}
+@font-face {
+    font-family: 'digital-7_mono';
+    src: url(../fonts/digital_7/digital-7_mono.ttf) format('ttf');
+}
+
+canvas, main {
+      position: absolute;
+      top:0;
+      z-index: 0;
+  }
+  .dials{
+      z-index: 1;
+      height: 150px;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+      position:absolute;
+      align-items: center;
+      top:0;
+      margin:auto;
+      width: 100%;
+      background-color: #8a8e99;
+    background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjUwJSIgY3k9IjEwMCUiIHI9IjYwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzhhOGU5OSIvPjxzdG9wIG9mZnNldD0iNjAlIiBzdG9wLWNvbG9yPSIjMjQyODMzIi8+PC9yYWRpYWxHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+    background-size: 100%;
+    background-image: -moz-radial-gradient(bottom, circle, #8a8e99, #242833 60%);
+    background-image: -webkit-radial-gradient(bottom, circle, #8a8e99, #242833 60%);
+    background-image: radial-gradient(circle at bottom, #8a8e99, #242833 60%);
+    box-shadow: 0px 3px 4px 1px black;
+    opacity: .8;
+  }
+
+.container { margin: 20vh auto;  }
+h1 { text-align: center; }
+#jog_dial_example {
+  position: relative;
+  width: 20vh;
+  height: 20vh;
+  margin: 20px auto;
+  background-color: gray;
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #808080), color-stop(100%, #000000));
+  background-image: -moz-linear-gradient(#808080, #000000);
+  background-image: -webkit-linear-gradient(#808080, #000000);
+  background-image: linear-gradient(#808080, #000000);
+  box-shadow: 0px 5px 9px 2px black;
+  border-radius: 100%;
+}
+
+#jog_dial_example #jog_dial_example_knob {
+  background: url('../imgs/base_one_knob.png');
+}
+
+#jog_dial_example_meter {
+  width: 200px;
+  height: 5vh;
+  margin: 20px auto 0px;
+  background: rgb(97, 148, 159);
+  overflow: hidden;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  border: rgb(114, 114, 114) 1px solid;
+}
+#jog_dial_example_meter div {
+  position: relative;
+  width: 0;
+  height: 100%;
+  background: #3adde9;
+  -webkit-box-shadow:0px 0px 35px 0px rgba(45,255,196,1);
+-moz-box-shadow: 0px 0px 35px 0px rgba(45,255,196,1);
+box-shadow: 0px 0px 35px 0px rgba(45,255,196,1);
+}
+
+#jog_dial_example_meter_fill{
+    position: relative;
+    z-index: 5;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    top: 46px;
+    font-family: 'digital-7', sans-serif;
+}
+
+.meterTitle{
+margin-top:10px;
+color: rgb(87, 153, 160);
+font-family: Arial, Helvetica, sans-serif;
+display: flex;
+flex-flow: row wrap;
+align-items: center;
+padding: 2px;
+
+}

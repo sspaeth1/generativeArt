@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/p5/p5.min.js"></script>
+    <title>Lines </title>
+</head>
+<body>
+    
+<script>
+    let width =  window.innerWidth,
+         height = window.innerHeight,
+        segmentLength = 50,
+        interations = 10,
+        saveX, saveY,
+        turn = theta = 0;
+        let saveY_func = ()=>{
+           if(Math.ceil(random()*10)%2==0){
+            height/2+Math.random().toFixed(1)*300
+           }else{
+               height/2-Math.random().toFixed(1)*300
+           }
+        }
+
+    function setup(){
+        createCanvas(width,height);
+        background('#454545');
+        stroke(255);
+        strokeWeight(1);
+        angleMode(DEGREES);
+        frameRate(5);
+
+        for(let y=0; y<30; y++){
+            turn++;
+        for(let x=0;x<width; x+=segmentLength){
+           if(x >= 300){
+               if(saveY  == undefined || saveY >= 0){
+                        saveY = height/2;
+                    }
+                fill('rgb(20,20,100');
+   //          text(saveY, x+segmentLength, saveY); 
+                beginShape()  
+                    vertex(x,saveY);
+                    saveY =  height/2+Math.random().toFixed(1)*300;
+                    vertex(x+segmentLength, saveY);
+                endShape();   
+
+           }else{
+            push();
+                beginShape()
+                    vertex(x,height/2);
+                    vertex(x+segmentLength, height/2);
+                endShape();
+            pop();
+
+           }
+            push();            
+                fill(256);
+                textSize(20);
+            //    text(x, x+segmentLength, height/2); 
+              pop();
+        }
+     }
+    }
+
+
+    function draw(){
+       
+            theta++;
+    background('#454545');
+     push();
+     noFill();
+        bezier(0, height/2, width, height/2, sin(theta)*1000, 200, width, height/3);
+        bezier(0, height-height/3, width/2, height-height/2, sin(theta*2)*1000, height, width, height-height/3);
+
+     pop();
+
+
+     for(let y=0; y<1; y++){
+            turn++;
+        for(let x=0;x<width; x+=segmentLength){
+           if( x > width/3 && x < width-width/3 ){
+               if(saveY  == undefined){
+                        saveY = height/2;
+                    }
+                fill('rgb(20,20,100');
+             text(saveY, x+segmentLength, saveY); 
+                beginShape()
+                    vertex(x,saveY);
+                    saveY =  height/2+Math.random().toFixed(1)*300;
+                    vertex(x+segmentLength, saveY);
+                endShape();   
+
+           }else{
+            push();
+                beginShape()
+                curveVertex(x,height/2);
+                curveVertex(x+segmentLength, height/2);
+                endShape();
+            pop();
+
+
+           }
+            push();
+                fill(256);
+                textSize(20);
+            //    text(x, x+segmentLength, height/2); 
+              pop();
+
+              push();
+              if(x > width/3 && x < width-width/3){
+                strokeWeight(20);
+                point(x-1 +segmentLength, saveY);      
+              }
+
+            pop();
+        }
+     }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/p5/p5.min.js"></script>
+    <title>Repeat Pattern</title>
+</head>
+<body>
+    
+<script>
+    // reverse gravity ellipse grows and moves up to top 
+    let width =  window.innerWidth,
+         height = window.innerHeight,
+         speed = 10,
+         mass = 1000,
+         time = 0,
+         grow = 10;
+         
+
+    function setup(){
+        createCanvas(width,height);
+        background('#454545');
+        frameRate(20);
+    }
+
+
+    function draw(){
+        time++;
+       let A = speed/time*mass;
+       if(grow < 200){
+        grow++;
+       }else{
+           grow= 10;
+       }
+
+        // speed = v
+        // A = v/t
+        //F=M*A
+
+        if( A > height || A <= 1){
+            ellipse(width/2, height, 200, 200);
+        }else{
+            ellipse(width/2, A, grow, grow);
+         //   console.log(width/(Math.random()*10) + width/sin(time*.01)*.1);
+        }
+
+        
+
+    }
+</script>
+
+</body>
+</html>

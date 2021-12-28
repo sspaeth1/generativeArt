@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../p5.js"></script>
+    <script src="../js/p5/p5.min.js"></script>
     <title>Repeat Pattern</title>
 </head>
 <body>
@@ -28,32 +28,47 @@
      //  frameRate(60);
         angleMode(DEGREES);
         rectMode(CENTER);
+        background(0);
+        stroke(255);
+        fill(0);
 
-        tileCountSlider = createSlider(1,20, 4);
+        tileCountSlider = createSlider(1,20, 7);
+        for(let x =0; x <tileingCount; x++){
+            let loop= 1; 
+           for(let y=0; y<tileingCount; y++){
+   
+                push();
+                     rect(x*width/tileingCount+width/tileingCount/2*loop,
+                                y*height/tileingCount+height/tileingCount/2*loop, 
+                                width/tileingCount-padding, 
+                                height/tileingCount-padding,
+                                30
+                                ); 
+                pop();     
+            }
+        }
 
     }
 
     function draw(){
         turn++;
-        background('rgb(110, 218, 174)');
-
+     //   background('rgb(110, 218, 174)');
        tileingCount = tileCountSlider.value();
         function createRect(x,y,size, size, roundedCorner){
             rect(x,y, size, size,roundedCorner);
         }
-
         fill('rgb(64, 157, 83)');
-
-
-
+        fill(0);
+        translate(width/2, height/2);
         for(let x =0; x <tileingCount; x++){
-
+            let loop= 1; 
            for(let y=0; y<tileingCount; y++){
-               if(x == 2 && y == 2){
+               console.log(loop);
+               if(x == 2 && y == 1){
                    push()
                     fill('rgb(232, 250, 49)');
                     stroke('rgb(232, 200, 49)');
-                    strokeWeight(sin(turn)*100);
+                  //  strokeWeight(sin(turn)*100);
                     
                        translate(x*width/tileingCount+ width/tileingCount/2, 
                                     y*height/tileingCount + height/tileingCount/2)
@@ -63,59 +78,25 @@
                                 0,
                                 width/tileingCount-padding*sin(turn).toFixed(2), //width/tileingCount-padding, 
                                  300,
-                                 20); 
+                                 200); 
                    pop();
                }else{
-   
-                     createRect(x*width/tileingCount+width/tileingCount/2,
-                                y*height/tileingCount+height/tileingCount/2, 
-                                width/tileingCount-padding, 
-                                height/tileingCount-padding,
-                                20
+                rotate(turn*.01);
+
+                push();
+                     rect(x*width/tileingCount+width/tileingCount/6*loop,
+                                y*height/tileingCount+height/tileingCount/6*loop, 
+                                width/tileingCount*sin(turn)*x-padding, 
+                                height/tileingCount*cos(turn)*y-padding,
+                                0
                                 ); 
+                pop();
                }
             }
 
-
-            push();
-            fill('blue');
-             let count = 4;
-                for(i=1; i<= count; i++){
-                  for(y=1; y<= count; y++){
-                  }
-                }
-            pop();
         }
 
-    /* grid  x:y 2d array for loop
-        function makeGrid(x,y){
-            rect(padding+ x*width/tileingCount+x*padding,
-                padding+y*height/tileingCount+y*padding,
-                width/tileingCount,
-                height/tileingCount
-                )
-        }
-        fill('red');
-        for(let y = 0; y <tileingCount; y++){
-            for(let x = 0; x < tileingCount; x++){
-                console.log();
-                if( y%3 == 0){
-                    
-                    push()
-                    rotate(45);
-                    fill('blue');
-                    makeGrid(x,y);
-                    pop()
-               
-                }else{
-                    push()
-                    fill('red');
-                    makeGrid(x,y);
-                pop()
-                }
-            }
-        }
-        */
+ 
     }
 </script>
 
