@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="../p5.min.js"></script>
+    <title>Waves v1</title>
+</head>
+<body>
+
+    <style>
+        body{
+            margin:0;
+            padding:0;
+        }
+    </style>
+    
+<script>
+    let width = innerWidth,
+        height = innerHeight,
+        counter,opacity, fillColor, rotator,
+        colorScheme = ['rgba(27, 20, 100, .5)', 'rgb(242, 103, 160)', 'rgb(253, 146, 166)', 'rgb(247, 246, 57)'  ];
+
+        counter = opacity = fillColor = rotator = 0;
+        fillColor = colorScheme[2];
+
+        let font;
+        function preload(){
+            font = loadFont('../fonts/AdobeClean-BoldIt.otf');
+        }
+
+    function setup(){
+        createCanvas(width, height); 
+        background(colorScheme[1]);
+        rotate(45, 0);
+
+        fill(colorScheme[3]);   
+        // blendMode(NONE);
+        textFont(font);
+        translate(width/1.4, -height/2.3);
+        angleMode(DEGREES);
+        rotate(270);
+        textSize(140);
+        text('RAYGEN', 30, 30);
+        
+        let createSquare = () => {
+            let counter = 0,
+            amount = 30;
+            for(let i=0 ; i < amount; i++){
+                fill(colorScheme[0]);
+                stroke(colorScheme[2])
+                setTimeout(()=> square(width/2 + counter,-height-200, height*2), 100);
+                counter +=10;
+                }
+        }
+        createSquare();
+        console.log('squareCreated');
+
+
+
+    }
+
+    function draw(){
+        angleMode(RADIANS);
+        rotate(45, 0);
+       
+        stroke(colorScheme[3]);
+        // line( 0,0, width/3 * sin(counter),height/3 * sin(counter*.01));
+        line( width ,height, width/2 * sin(counter),height/2 * sin(counter*.01));
+
+        noStroke();
+        ellipse(width/2 * sin(counter),height/2 * sin(counter*.01),sin(counter)*60, sin(counter)*60);
+     //   stroke(opacity);
+
+
+
+   
+
+        counter += 1;
+        // fillColor = sin(counter*.01)*100;
+        // if(fillColor > 256){
+        //     fillColor = 128;
+        // }
+     
+        rotator += 1;
+        if(rotator > 180){
+            rotator = 0;
+        }
+
+        opacity += 1;
+        if(opacity >= 256){
+        opacity = 1;
+        }
+        
+        fill(colorScheme[0]);
+        // square( width/2,-height, height*2);
+
+
+
+
+    }
+
+
+</script>
+
+</body>
+</html>

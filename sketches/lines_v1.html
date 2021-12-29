@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/p5/p5.min.js"></script>
+    <title>Lines </title>
+</head>
+<body>
+    
+<script>
+    let width =  window.innerWidth,
+         height = window.innerHeight,
+        segmentLength = 50;
+
+    function setup(){
+        createCanvas(width,height);
+        background('#454545');
+        stroke(255);
+        strokeWeight(1);
+    }
+
+
+    function draw(){
+        let theta = 0 ;
+            theta++;
+        background('#454545');
+        for(x=0;x<width; x+=segmentLength){
+            for(y=0;y<height; y+=segmentLength){
+                push()
+                 //   translate(0, y+10);
+                    line(x,y, x+segmentLength, y+sin(theta)*x*.1);
+                pop();
+            }
+        }
+    }
+</script>
+
+</body>
+</html>

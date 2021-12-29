@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/p5/p5.min.js"></script>
+    <title>Repeat Pattern</title>
+</head>
+<body>
+    
+<style>
+    input[type='range']{
+        width:100%;
+        height: 30px;
+        border:none;
+    }
+</style>
+<script>
+    let width =  window.innerWidth,
+        height = window.innerHeight,
+        tileingCount = 4,
+        padding = 50,
+        turn = 0;
+
+    function setup(){
+        createCanvas(width,height);
+     //  frameRate(60);
+        angleMode(DEGREES);
+        rectMode(CENTER);
+        background(0);
+        stroke(255);
+        fill(0);
+
+        tileCountSlider = createSlider(1,20, 7);
+        for(let x =0; x <tileingCount; x++){
+            let loop= 1; 
+           for(let y=0; y<tileingCount; y++){
+   
+                push();
+                     rect(x*width/tileingCount+width/tileingCount/2*loop,
+                                y*height/tileingCount+height/tileingCount/2*loop, 
+                                width/tileingCount-padding, 
+                                height/tileingCount-padding,
+                                30
+                                ); 
+                pop();     
+            }
+        }
+
+    }
+
+    function draw(){
+        turn++;
+     //   background('rgb(110, 218, 174)');
+       tileingCount = tileCountSlider.value();
+        function createRect(x,y,size, size, roundedCorner){
+            rect(x,y, size, size,roundedCorner);
+        }
+        fill('rgb(64, 157, 83)');
+        fill(0);
+        translate(width/2, height/2);
+        for(let x =0; x <tileingCount; x++){
+            let loop= 1; 
+           for(let y=0; y<tileingCount; y++){
+               console.log(loop);
+               if(x == 2 && y == 1){
+                   push()
+                    fill('rgb(232, 250, 49)');
+                    stroke('rgb(232, 200, 49)');
+                  //  strokeWeight(sin(turn)*100);
+                    
+                       translate(x*width/tileingCount+ width/tileingCount/2, 
+                                    y*height/tileingCount + height/tileingCount/2)
+                       rotate(turn);
+
+                       createRect(0,
+                                0,
+                                width/tileingCount-padding*sin(turn).toFixed(2), //width/tileingCount-padding, 
+                                 300,
+                                 200); 
+                   pop();
+               }else{
+                rotate(turn*.01);
+
+                push();
+                     rect(x*width/tileingCount+width/tileingCount/6*loop,
+                                y*height/tileingCount+height/tileingCount/6*loop, 
+                                width/tileingCount*sin(turn)*x-padding, 
+                                height/tileingCount*cos(turn)*y-padding,
+                                0
+                                ); 
+                pop();
+               }
+            }
+
+        }
+
+ 
+    }
+</script>
+
+</body>
+</html>

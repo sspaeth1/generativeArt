@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../p5.min.js"></script>
+
+    <title>Rose </title>
+</head>
+<body>
+
+    <style>
+        input{
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+        }
+        input[type="range"]{
+            -webkit-appearance:none;
+            height:40px;
+            width: 500px;
+            background: linear-gradient(to right, #c94950 0%, #3d2e4d 100%);
+            background-size: 1000px 300px;
+            background-position:center;
+            background-repeat:no-repeat;
+            overflow:hidden;
+            outline: none;
+}
+
+thumb:after{
+  content:" ";
+  width:160px;
+  height:10px;
+  position:absolute;
+  z-index:1;
+  right:20px;
+  top:5px;
+  background: #ff5b32;
+  background: linear-gradient(to right, #f088fc 1%, #AC6CFF 70%);
+}
+    </style>
+
+    <script>
+        let colorScheme= ['#c94950', '#94950','#edbc5d', '#6a8085', '#3d2e4d'],
+            k = 4;
+        
+            let radius = 200;
+            radius = radius -2;
+
+        let x =  20;
+        let y =  20;
+        let elpsRadius = 10;
+        let slider;
+        let width =  500,
+            height = 500,
+            counter=0,
+            rotation = 0;
+
+        function setup(){
+            createCanvas( width, height);
+            slider = createSlider( 3 ,8, 5)
+
+            background(colorScheme[0]);
+       }
+
+        function draw(){
+      
+            background(201, 73, 80);
+            translate(width/2, height/2);
+            rotate(rotation, 10);
+            elpsRadius = sin(counter)*height/5;
+
+            k = slider.value();
+            
+            beginShape();
+            
+            rotate(20,0);
+            for( var a=0; a < TWO_PI; a+= 0.01){
+                var r =  radius*sin(counter+3) * cos(k * a)//100;
+                var x = r * cos(a);
+                var y = r* sin(a);
+                fill(125,30,70);
+            stroke(colorScheme[4]); //'rgba(18.8%, 28.6%, 31.4%, 1'); //
+            strokeWeight(2);
+            vertex(x,y);
+            }
+            
+
+            endShape();
+
+
+            ellipse( 0, 0, elpsRadius, elpsRadius);
+            fill(colorScheme[2]);
+            stroke(colorScheme[4]);
+
+            counter +=.01;
+            rotation += .005;
+
+        }
+
+
+
+       
+            
+    </script>
+    
+
+
+</body>
+</html>

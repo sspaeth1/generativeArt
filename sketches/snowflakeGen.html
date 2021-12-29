@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/p5/p5.min.js"></script>
+    <title>Snowflake generator</title>
+</head>
+<body>
+    
+    
+<style>
+    body{
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    input[type='range'], button{
+        -webkit-appearance: none;
+        width: 50%;
+    height: 25px;
+    background: rgb(179, 179, 179);
+    }
+
+    button{
+        margin-top:25px;
+        background: #648bce;
+        color: #fff;
+        height: 50px;
+        font-size: 20px;
+        border: none;
+    }
+    button:hover{
+        background: #80a3df;
+    }
+
+
+    input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #648bce;
+  cursor: pointer;
+}
+
+input[type='range']::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #04AA6D;
+  cursor: pointer;
+}
+label{
+    display: flex;
+    justify-content: start;
+    align-items: flex-start;
+}
+</style>
+
+    <script>
+       let baseWidthslider,
+       growSlider,
+       widthSlider,
+       width = innerWidth/2,
+       height = innerHeight/2;
+       
+       function setup(){
+           createCanvas(width, height);
+           background(34);
+
+
+
+            // start create sliders on page
+           baseWidthslider = createSlider(1, width/2-50, 30, .01);
+           growSlider = createSlider(1, 5, 0, .01);
+           widthSlider = createSlider(1, 300, 10);
+
+           baseWidthslider.style('width', 200);
+           baseWidthslider.id('baseWidth');
+           growSlider.id('grow');
+           widthSlider.id('width');
+
+
+           let baseWidthTitle = document.createElement("label"),
+            growSliderTitle = document.createElement("label"),
+            widthSliderTitle = document.createElement("label");
+           baseWidthTitle.innerHTML = "Base Width";
+           growSliderTitle.innerHTML = "Grow";
+           widthSliderTitle.innerHTML = "Width";
+           document.getElementById('baseWidth').insertAdjacentElement("beforebegin", baseWidthTitle);
+           document.getElementById('grow').insertAdjacentElement("beforebegin", growSliderTitle);
+           document.getElementById('width').insertAdjacentElement("beforebegin", widthSliderTitle);
+            let reset = document.createElement("button");
+            reset.innerText = "Reset";
+            document.getElementById('width').insertAdjacentElement("afterend", reset);
+            document.body.lastChild.addEventListener('click', function() {location.reload(); console.log('reset')});
+        // end create sliders
+       }
+
+
+       function draw(){
+           let centerSize = baseWidthslider.value();
+           let growAmount = growSlider.value();
+           let widthAmount = widthSlider.value();
+           hexagon = 6;
+           point(200, 200);
+           stroke('rgba(20,20,20,.1)');
+           fill(256);
+           noStroke();
+           polygon(width/2, height/2, centerSize, hexagon);
+
+
+         angleMode(DEGREES);
+           translate(width/2, height/2);
+         rotate(30);
+         
+           let angle = 0;
+        //    let grow = (input) =>{
+
+            // switch(input){
+            //     case input > 0:
+            //         return growSlider.value();
+            //         break;
+            //     case input < 0:
+            //         return -1 * vgrowSlider.value();
+            //         break;
+            //     case input = 0:
+            //         return 0
+            //         break;
+            // }
+
+        //        if(input > 0){
+        //        return growSlider.value()
+        //        }else if(input < 0){
+        //         return -1 * growSlider.value();
+        //        }else if(input=0){
+        //            return 0;
+        //        }
+        //    }
+           for(let i = 0; i <= hexagon; i++){
+            fill(256);
+            let x = centerSize * sin(angle),
+                y = centerSize * cos(angle);            
+            ellipse(x * growAmount  , y* growAmount , widthAmount, widthAmount);
+            angle+=60;
+
+           }
+           
+       }
+
+ 
+
+       function polygon(x, y, radius, npoints) {
+  let angle = TWO_PI / npoints;
+  beginShape();
+  for (let a = 0; a < TWO_PI; a += angle) {
+    let sx = x + cos(a) * radius;
+    let sy = y + sin(a) * radius;
+    vertex(sx, sy);
+  }
+  endShape(CLOSE);
+}
+    </script>
+</body>
+</html>
