@@ -11,6 +11,10 @@
     <style>
     body{
             background: rgb(244, 244, 244);
+            display: flex;
+            flex-flow: column wrap;
+            justify-content: center;
+            align-items: center;
         }
         main{
             display: flex;
@@ -23,16 +27,24 @@
             box-shadow: 20px 20px grey;
         }
         #repaint{
-        border:1px solid black;
+        border:5px solid black;
         background-color:'#000';
         color:'#fff';
         box-shadow: 5px 5px grey;
-        padding:5px;
+        padding:10px;
+        max-width: 50%;
+        align-items: center;
+        font-weight: 900;
+        }
+        #repaint:hover{
+        background: yellow;
+       color:blue;
+       border:red 5px solid;
         }
     </style>
-<button id='repaint'>Paint another</button>
-<p id="painting"></p>
 
+<p id="painting"></p>
+<button id='repaint'>Paint another</button>
 <script>
 
 
@@ -47,12 +59,11 @@ colorPallet = ['#fcba03','#035afc', '#ed393f' ],
 rando = Math.ceil(Math.random()*3)-1;
 
 
-console.log(colorPallet[0]);
-
 function setup(){
  createCanvas(width+ 2*padding, height + 2*padding);
  background(colorPallet[Math.ceil(Math.random()*3)-1]);
  strokeWeight(10);
+
 
 
 function drawRectWidth(rectWidth, rectHeight){
@@ -64,7 +75,6 @@ function drawRectWidth(rectWidth, rectHeight){
 
     let leftOverWidth = width - randWidth;
 
-    console.log("randWidth " + randWidth.toFixed(0));
 
     if(randWidth < maxSize || randHeight < maxSize || rectHeight < maxSize || rectWidth < maxSize){
          return makeSquares()
@@ -103,6 +113,9 @@ function draw(){
     rect(padding/2,padding/2, window.innerWidth/2-padding, window.innerHeight/2-padding);
 
 }
+
+
+
 
 
 </script>
