@@ -9,7 +9,7 @@
 </head>
 <body>
     <style>
-        body{
+    body{
             background: rgb(244, 244, 244);
         }
         main{
@@ -22,16 +22,24 @@
             margin:auto;
             box-shadow: 20px 20px grey;
         }
+        #repaint{
+        border:1px solid black;
+        background-color:'#000';
+        color:'#fff';
+        box-shadow: 5px 5px grey;
+        padding:5px;
+        }
     </style>
-<p id="insert"></p>
+<button id='repaint'>Paint another</button>
+<p id="painting"></p>
 
 <script>
 
 
-let iterateNum = 5,
-padding = 5,
-width = 800 - 2*padding,
-height = 800 - 2*padding;
+
+let padding = 5,
+width = window.innerWidth/2 - 2*padding,
+height = window.innerHeight/2 - 2*padding;
 largePercent = .75;
 smallPercent = 1 - largePercent,
 colorPalletPure = ['#ff0000', '#ffff00','#0000ff'],
@@ -45,27 +53,6 @@ function setup(){
  createCanvas(width+ 2*padding, height + 2*padding);
  background(colorPallet[Math.ceil(Math.random()*3)-1]);
  strokeWeight(10);
-
- // recursion in just one square
- /*
- func1 =(rectWidth , rectHeight)=>{
-     if(rectHeight < 5 || rectWidth < 5){
-         return 
-     }else{
-  
-        fill(colorPallet[Math.ceil(Math.random()*3)-1]);
-         rect(padding,padding, rectWidth, rectHeight);
-  rectHeight =  rectHeight/Math.ceil(Math.random()*3)-1;
-        rectWidth = rectWidth/Math.ceil(Math.random()*3)-1;
-        return       func1(rectWidth, rectHeight)
-     }
-
-}
- func1(width, height);
-
-*/
-
-// random horizontal or vertical split
 
 
 function drawRectWidth(rectWidth, rectHeight){
@@ -98,21 +85,25 @@ function drawRectWidth(rectWidth, rectHeight){
             fill(colorPallet[Math.ceil(Math.random()*3)-1]);
             rect(padding, randHeight, leftOverWidth, rectHeight);
         }
-        width = randWidth;
-        height = randHeight;
-    }
+       // width = randWidth;
+       // height = randHeight;
+    } 
 }
 
-drawRectWidth(width, height);
+ drawRectWidth(width, height); 
+  document.getElementById('repaint').addEventListener('click',()=>{ 
+    drawRectWidth(width, height); });
+  
+  setInterval(drawRectWidth(width,height), 100);
 }
-
 
 function draw(){
     noFill();
-    strokeWeight(30);
-    rect(padding/2,padding/2, 800-padding, 800-padding);
+  //  strokeWeight(30);
+    rect(padding/2,padding/2, window.innerWidth/2-padding, window.innerHeight/2-padding);
 
 }
+
 
 </script>
 
