@@ -1,12 +1,11 @@
-## Welcome to GitHub Pages
+## Welcome to 52in2022
 
-You can use the [editor on GitHub](https://github.com/sspaeth1/generativeArt/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
+create52in2022. Resolution: create more. Setting a reachable 1 every week. The common theme will be generative art it may be through code, prerendered 3D from parametric design 
 ### Markdown
 
+```
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+```
 
 ```markdown
 Syntax highlighted code block
