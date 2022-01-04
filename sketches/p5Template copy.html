@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/p5/p5.min.js"></script>
+    <title>Repeat Pattern</title>
+</head>
+<body>
+    
+<script>
+    let width =  window.innerWidth;
+    let height = window.innerHeight;
+    let turn=200;
+    const colors = ['#1A5F7A', '#086E7D', '#FFC900', '#FFF89A' ],
+    color1 = colors[0],
+    color2 = colors[1];
+    color3 = colors[2];
+    color4 = colors[3];
+
+
+
+    function setup(){
+        createCanvas(width,height);
+        background(colors[0]);
+        angleMode(DEGREES);
+    }
+
+    function draw(){
+        turn++
+        class Rectangle{
+            constructor(x,y,w,h,sw,r,color){
+                this.x = x;
+                this.y = y;
+                this.r = r;
+
+
+            
+
+                translate(this.x, this.y);
+                rotate(r);
+                stroke(color3)
+                fill(color4);
+                rect(0,0,w,h);
+
+                push();
+                   strokeWeight(sw);
+                   stroke(color3);
+                    point(w, h);
+                 pop();
+                resetMatrix();
+            }
+        }
+    for(y=0;y<9;y++){
+      //  setTimeout(()=>{ 
+            for(let x=0; x<8; x++){
+               //     rotate(45);
+            if(y%2===0){
+             let updatedRect = new Rectangle(100*x+80,100*y,50,50,20,cos(turn)*200,color);
+
+            }
+            let updatedRect = new Rectangle(100*x+80,100*y,50,50,20,sin(turn)*200,color4);
+
+        }
+     //   },1000*y);
+
+
+      //  resetMatrix();
+    }
+
+
+
+
+    }
+</script>
+
+</body>
+</html>

@@ -15,7 +15,8 @@
         segmentLength = 50,
         interations = 10,
         saveX, saveY,
-        turn = theta = 0;
+        turn = theta = 0,
+        fraction = .001;
         let saveY_func = ()=>{
            if(Math.ceil(random()*10)%2==0){
             height/2+Math.random().toFixed(1)*300
@@ -32,51 +33,16 @@
         angleMode(DEGREES);
         frameRate(5);
 
-        for(let y=0; y<30; y++){
-            turn++;
-        for(let x=0;x<width; x+=segmentLength){
-           if(x >= 300){
-               if(saveY  == undefined || saveY >= 0){
-                        saveY = height/2;
-                    }
-                fill('rgb(20,20,100');
-   //          text(saveY, x+segmentLength, saveY); 
-                beginShape()  
-                    vertex(x,saveY);
-                    saveY =  height/2+Math.random().toFixed(1)*300;
-                    vertex(x+segmentLength, saveY);
-                endShape();   
-
-           }else{
-            push();
-                beginShape()
-                    vertex(x,height/2);
-                    vertex(x+segmentLength, height/2);
-                endShape();
-            pop();
-
-           }
-            push();            
-                fill(256);
-                textSize(20);
-            //    text(x, x+segmentLength, height/2); 
-              pop();
-        }
-     }
+      
     }
 
 
     function draw(){
-       
+        console.log(noise(1));
+            fraction++;
             theta++;
-    background('#454545');
      push();
-     noFill();
-        bezier(0, height/2, width, height/2, sin(theta)*1000, 200, width, height/3);
-        bezier(0, height-height/3, width/2, height-height/2, sin(theta*2)*1000, height, width, height-height/3);
-
-     pop();
-
+     background('#454545');
 
      for(let y=0; y<1; y++){
             turn++;
@@ -116,8 +82,18 @@
               }
 
             pop();
+
+            push();
+                strokeWeight(noise(5)*200);
+                point(width/3, height/2*noise(3))
+            pop();
         }
      }
+     noFill();
+        bezier(0, height/2, width, height/2, sin(theta)*1000, 200, width, height/3);
+        bezier(0, height-height/3, width/2, height-height/2, sin(theta*2)*1000, height, width, height-height/3);
+
+     pop();
     }
 </script>
 

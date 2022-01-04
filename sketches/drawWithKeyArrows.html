@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/p5/p5.min.js" type="text/javascript"></script>
+    <title>key pressed</title>
+</head>
+<body>
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+        }
+    </style>
+   <script>
+let w = window.innerWidth,
+    h = window.innerHeight,
+    x= y = 200,
+    add= 0,
+    size=50;
+    
+
+function setup(){
+    createCanvas(w, h);
+}
+
+function draw(){
+    add++;
+    strokeWeight(1);
+    stroke(20);
+    fill(20);
+    rect(x, y, size, size);
+
+
+}
+
+function keyPressed() {
+        if (keyCode === LEFT_ARROW) {
+            x = x-size;
+        } else if (keyCode === RIGHT_ARROW) {
+            x = x+size;
+        }else if (keyCode === UP_ARROW) {
+            y = y-size;
+        } else if (keyCode === DOWN_ARROW) {
+            y = y+size;
+        }
+    }
+
+
+   </script> 
+
+</body>
+</html>
