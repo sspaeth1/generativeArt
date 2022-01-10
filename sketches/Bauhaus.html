@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/p5/p5.min.js"></script>
+    <title>Repeat Pattern</title>
+</head>
+<body>
+    <img src="../imgs/Bauhaus.png" alt="Bauhaus text head name">
+    <button id='repaint'>Paint another</button>
+
+    <style>
+        body{
+            background: rgb(244, 244, 244);
+            display: flex;
+            flex-flow: column wrap;
+            justify-content: center;
+            align-items: center;
+        }
+        main{
+            display: flex;
+            flex-flow: column wrap;
+            height: 100vh;
+
+        }
+        canvas{
+            margin-top:20px;
+            box-shadow: 20px 20px grey;
+        }
+        #repaint{
+        border:5px solid black;
+        background-color:'#000';
+        color:'#fff';
+        box-shadow: 5px 5px grey;
+        padding:10px;
+        max-width: 50%;
+        align-items: center;
+        font-weight: 900;
+        }
+        #repaint:hover{
+        background: rgb(131, 131, 131);
+       color:rgb(242, 242, 249);
+       border:rgb(97, 97, 97) 5px solid;
+        }
+    </style>
+    
+<script>
+    let repaint = document.getElementById('repaint');
+    repaint.addEventListener('click', ()=> location.reload());
+
+   let width =  window.innerHeight/1.4;
+    let height = window.innerHeight/1.4;
+    if(height > window.width){
+        let width =  window.innerWidth/2;
+        let height = window.innerWidth/2;
+    }
+
+
+    colorPallet = ['#fcba03','#035afc', '#ed393f' ],
+    color1= colorPallet[0],
+    color2= colorPallet[1],
+    color3= colorPallet[2],
+    lineX = 0;
+
+
+    function setup(){
+        createCanvas(width,height,WEBGL);
+        background('#fff');
+   
+
+    }
+
+    function draw(){
+        rando_width = random(width),
+    rando_height = random(height),
+    rand_3 =  random(3);
+    let locX = mouseX - height / 2;
+  let locY = mouseY - width / 2;
+  strokeWeight(8);
+  smooth();
+  imageMode(CENTER);
+
+//lights
+    ambientLight(256, 256, 256);
+    pointLight(100, 100, 100, locX, locY, 100);
+
+
+
+  push();
+           noFill()
+           rectMode(CENTER);
+            stroke(0)
+            strokeWeight(40);
+            rect(0,0,width,height);
+        pop();
+
+
+
+      push();
+             noStroke();
+            translate(random(width/2), random(height/2  ));
+            fill(250, 140, 0);
+         //  ambientMaterial(20);
+         shininess(3);
+         randColor = 'color'+Math.ceil(random(3));
+      specularMaterial(color1);
+            let sphereSize = random(100);
+            sphere(sphereSize);
+            stroke(0);
+            strokeWeight(10);
+            ellipse(0,0, sphereSize*2.1,sphereSize*2.1);
+        pop();
+
+translate(-width/2, -height/2);
+        push();
+
+            translate(random(width/2), random(height/2));
+            scale(random(3));
+            fill(color1);
+            ellipse(width/4, width/4, width/3, width/3);
+        pop();
+        push();
+        translate(random(width/2), random(height/2));
+          scale(random(3));
+            fill(color3);
+            rect(width/4,width/3, width/4, width/4);
+         pop();
+         push();
+            fill(color2);
+            scale(.3);
+            scale(random(2));
+            translate(random(width/2), random(height/2));
+            triangle(width/2, 0, width, height, 0, height );
+        pop();
+
+
+       if(Math.ceil(random(5)) == 5){
+        rotate(1)
+         translate(width/1.5,-height/2.5);
+       }else if( Math.ceil(random(5)) == 4){
+        translate(width/2,0);
+         scale(-1,1);
+       }else if( Math.ceil(random(5)) == 3){
+        translate(width/9,height/9);
+    scale(.5,.8);
+       }else if( Math.ceil(random(5)) == 2){
+        rotate(random(.1,1));
+    scale(random(1),1)
+       }
+
+
+         
+      
+        
+        for(let i=1 ; i< 62; i++){
+            lineX+=10;
+
+            push();
+                strokeWeight(8);
+                stroke('black');
+                line(lineX*i,0, lineX*i, height );
+            pop();
+        }
+        noLoop();
+    }
+
+
+</script>
+
+</body>
+</html>
